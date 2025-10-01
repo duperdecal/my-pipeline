@@ -1,0 +1,34 @@
+[2025-10-01T16:45:55.177+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-10-01T16:45:55.291+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_orchestrate.T_in_ELT manual__2025-10-01T16:45:37.608885+00:00 [queued]>
+[2025-10-01T16:45:55.313+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_orchestrate.T_in_ELT manual__2025-10-01T16:45:37.608885+00:00 [queued]>
+[2025-10-01T16:45:55.314+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-10-01T16:45:55.349+0000] {taskinstance.py:2330} INFO - Executing <Task(DockerOperator): T_in_ELT> on 2025-10-01 16:45:37.608885+00:00
+[2025-10-01T16:45:55.374+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_orchestrate', 'T_in_ELT', 'manual__2025-10-01T16:45:37.608885+00:00', '--job-id', '124', '--raw', '--subdir', 'DAGS_FOLDER/orchestrate.py', '--cfg-path', '/tmp/tmph7jlxx1y']
+[2025-10-01T16:45:55.380+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=439) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-10-01T16:45:55.381+0000] {standard_task_runner.py:91} INFO - Job 124: Subtask T_in_ELT
+[2025-10-01T16:45:55.382+0000] {standard_task_runner.py:64} INFO - Started process 443 to run task
+[2025-10-01T16:45:55.513+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_orchestrate.T_in_ELT manual__2025-10-01T16:45:37.608885+00:00 [running]> on host 4dc03bc859db
+[2025-10-01T16:45:55.744+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_orchestrate' AIRFLOW_CTX_TASK_ID='T_in_ELT' AIRFLOW_CTX_EXECUTION_DATE='2025-10-01T16:45:37.608885+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-10-01T16:45:37.608885+00:00'
+[2025-10-01T16:45:55.747+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-10-01T16:45:56.604+0000] {docker.py:367} INFO - Starting docker container from image ghcr.io/dbt-labs/dbt-postgres:1.9.latest
+[2025-10-01T16:46:05.390+0000] {docker.py:438} INFO - [0m16:46:05  Running with dbt=1.9.0
+[2025-10-01T16:46:06.145+0000] {docker.py:438} INFO - [0m16:46:06  Registered adapter: postgres=1.9.0
+[2025-10-01T16:46:07.233+0000] {docker.py:438} INFO - [0m16:46:07  Found 2 models, 4 data tests, 1 source, 429 macros
+[2025-10-01T16:46:07.239+0000] {docker.py:438} INFO - [0m16:46:07
+[2025-10-01T16:46:07.240+0000] {docker.py:438} INFO - [0m16:46:07  Concurrency: 4 threads (target='dev')
+[2025-10-01T16:46:07.242+0000] {docker.py:438} INFO - [0m16:46:07
+[2025-10-01T16:46:07.699+0000] {docker.py:438} INFO - [0m16:46:07  1 of 2 START sql table model analytics.silver_layer ............................ [RUN]
+[2025-10-01T16:46:08.164+0000] {docker.py:438} INFO - [0m16:46:08  1 of 2 OK created sql table model analytics.silver_layer ....................... [[32mSELECT 18490[0m in 0.46s]
+[2025-10-01T16:46:08.172+0000] {docker.py:438} INFO - [0m16:46:08  2 of 2 START sql table model analytics.gold_layer .............................. [RUN]
+[2025-10-01T16:46:08.376+0000] {docker.py:438} INFO - [0m16:46:08  2 of 2 OK created sql table model analytics.gold_layer ......................... [[32mSELECT 13912[0m in 0.20s]
+[2025-10-01T16:46:08.415+0000] {docker.py:438} INFO - [0m16:46:08
+[2025-10-01T16:46:08.416+0000] {docker.py:438} INFO - [0m16:46:08  Finished running 2 table models in 0 hours 0 minutes and 1.17 seconds (1.17s).
+[2025-10-01T16:46:08.504+0000] {docker.py:438} INFO - [0m16:46:08
+[2025-10-01T16:46:08.506+0000] {docker.py:438} INFO - [0m16:46:08  [32mCompleted successfully[0m
+[2025-10-01T16:46:08.507+0000] {docker.py:438} INFO - [0m16:46:08
+[2025-10-01T16:46:08.508+0000] {docker.py:438} INFO - [0m16:46:08  Done. PASS=2 WARN=0 ERROR=0 SKIP=0 TOTAL=2
+[2025-10-01T16:46:10.930+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-10-01T16:46:10.998+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=pipeline_orchestrate, task_id=T_in_ELT, run_id=manual__2025-10-01T16:45:37.608885+00:00, execution_date=20251001T164537, start_date=20251001T164555, end_date=20251001T164610
+[2025-10-01T16:46:11.057+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-10-01T16:46:11.102+0000] {taskinstance.py:3503} INFO - 1 downstream tasks scheduled from follow-on schedule check
+[2025-10-01T16:46:11.108+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

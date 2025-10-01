@@ -1,0 +1,18 @@
+[2025-09-30T09:00:07.822+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-30T09:00:08.016+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_orchestrate.EL_in_ELT scheduled__2025-09-30T08:00:00+00:00 [queued]>
+[2025-09-30T09:00:08.043+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_orchestrate.EL_in_ELT scheduled__2025-09-30T08:00:00+00:00 [queued]>
+[2025-09-30T09:00:08.044+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-30T09:00:08.106+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): EL_in_ELT> on 2025-09-30 08:00:00+00:00
+[2025-09-30T09:00:08.256+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=411) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-09-30T09:00:08.209+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_orchestrate', 'EL_in_ELT', 'scheduled__2025-09-30T08:00:00+00:00', '--job-id', '43', '--raw', '--subdir', 'DAGS_FOLDER/orchestrate.py', '--cfg-path', '/tmp/tmpjizwxlt4']
+[2025-09-30T09:00:08.259+0000] {standard_task_runner.py:91} INFO - Job 43: Subtask EL_in_ELT
+[2025-09-30T09:00:08.262+0000] {standard_task_runner.py:64} INFO - Started process 417 to run task
+[2025-09-30T09:00:08.559+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_orchestrate.EL_in_ELT scheduled__2025-09-30T08:00:00+00:00 [running]> on host a352e8b57b25
+[2025-09-30T09:00:08.826+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_orchestrate' AIRFLOW_CTX_TASK_ID='EL_in_ELT' AIRFLOW_CTX_EXECUTION_DATE='2025-09-30T08:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2025-09-30T08:00:00+00:00'
+[2025-09-30T09:00:08.828+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-30T09:00:13.978+0000] {python.py:237} INFO - Done. Returned value was: None
+[2025-09-30T09:00:13.980+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-30T09:00:14.006+0000] {taskinstance.py:1206} INFO - Marking task as SUCCESS. dag_id=pipeline_orchestrate, task_id=EL_in_ELT, run_id=scheduled__2025-09-30T08:00:00+00:00, execution_date=20250930T080000, start_date=20250930T090008, end_date=20250930T090014
+[2025-09-30T09:00:14.110+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 0
+[2025-09-30T09:00:14.145+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-30T09:00:14.152+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

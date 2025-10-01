@@ -1,0 +1,128 @@
+[2025-09-30T04:44:01.492+0000] {local_task_job_runner.py:120} INFO - ::group::Pre task execution logs
+[2025-09-30T04:44:01.669+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: pipeline_orchestrate.EL_in_ELT manual__2025-09-30T04:43:54.680306+00:00 [queued]>
+[2025-09-30T04:44:01.687+0000] {taskinstance.py:2076} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: pipeline_orchestrate.EL_in_ELT manual__2025-09-30T04:43:54.680306+00:00 [queued]>
+[2025-09-30T04:44:01.687+0000] {taskinstance.py:2306} INFO - Starting attempt 1 of 2
+[2025-09-30T04:44:01.717+0000] {taskinstance.py:2330} INFO - Executing <Task(PythonOperator): EL_in_ELT> on 2025-09-30 04:43:54.680306+00:00
+[2025-09-30T04:44:01.760+0000] {logging_mixin.py:188} WARNING - /home/***/.local/lib/python3.12/site-packages/***/task/task_runner/standard_task_runner.py:62 DeprecationWarning: This process (pid=519) is multi-threaded, use of fork() may lead to deadlocks in the child.
+[2025-09-30T04:44:01.768+0000] {standard_task_runner.py:64} INFO - Started process 521 to run task
+[2025-09-30T04:44:01.760+0000] {standard_task_runner.py:90} INFO - Running: ['***', 'tasks', 'run', 'pipeline_orchestrate', 'EL_in_ELT', 'manual__2025-09-30T04:43:54.680306+00:00', '--job-id', '35', '--raw', '--subdir', 'DAGS_FOLDER/orchestrate.py', '--cfg-path', '/tmp/tmpq1j_7prf']
+[2025-09-30T04:44:01.771+0000] {standard_task_runner.py:91} INFO - Job 35: Subtask EL_in_ELT
+[2025-09-30T04:44:02.162+0000] {task_command.py:426} INFO - Running <TaskInstance: pipeline_orchestrate.EL_in_ELT manual__2025-09-30T04:43:54.680306+00:00 [running]> on host 42770b745e57
+[2025-09-30T04:44:02.533+0000] {taskinstance.py:2648} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='pipeline_orchestrate' AIRFLOW_CTX_TASK_ID='EL_in_ELT' AIRFLOW_CTX_EXECUTION_DATE='2025-09-30T04:43:54.680306+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='manual__2025-09-30T04:43:54.680306+00:00'
+[2025-09-30T04:44:02.537+0000] {taskinstance.py:430} INFO - ::endgroup::
+[2025-09-30T04:44:11.369+0000] {taskinstance.py:441} INFO - ::group::Post task execution logs
+[2025-09-30T04:44:11.375+0000] {taskinstance.py:2905} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+psycopg2.errors.InvalidSchemaName: schema "raw_data" does not exist
+LINE 2: CREATE TABLE raw_data.raw_data (
+                     ^
+
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 465, in _execute_task
+    result = _execute_callable(context=context, **execute_callable_kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/taskinstance.py", line 432, in _execute_callable
+    return execute_callable(context=context, **execute_callable_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/models/baseoperator.py", line 401, in wrapper
+    return func(self, *args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 235, in execute
+    return_value = self.execute_callable()
+                   ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/airflow/operators/python.py", line 252, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/airflow/dags/orchestrate.py", line 11, in s3_to_db
+    df.to_sql("raw_data", engine, if_exists="replace", index=False, schema="raw_data")
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/util/_decorators.py", line 333, in wrapper
+    return func(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/core/generic.py", line 3008, in to_sql
+    return sql.to_sql(
+           ^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 788, in to_sql
+    return pandas_sql.to_sql(
+           ^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1948, in to_sql
+    table = self.prep_table(
+            ^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 1852, in prep_table
+    table.create()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 936, in create
+    self._execute_create()
+  File "/home/airflow/.local/lib/python3.12/site-packages/pandas/io/sql.py", line 922, in _execute_create
+    self.table.create(bind=self.pd_sql.con)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/schema.py", line 962, in create
+    bind._run_ddl_visitor(ddl.SchemaGenerator, self, checkfirst=checkfirst)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2221, in _run_ddl_visitor
+    visitorcallable(self.dialect, self, **kwargs).traverse_single(element)
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/visitors.py", line 524, in traverse_single
+    return meth(obj, **kw)
+           ^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/ddl.py", line 899, in visit_table
+    self.connection.execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1385, in execute
+    return meth(self, multiparams, params, _EMPTY_EXECUTION_OPTS)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/sql/ddl.py", line 80, in _execute_on_connection
+    return connection._execute_ddl(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1477, in _execute_ddl
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1953, in _execute_context
+    self._handle_dbapi_exception(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 2134, in _handle_dbapi_exception
+    util.raise_(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/util/compat.py", line 211, in raise_
+    raise exception
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/base.py", line 1910, in _execute_context
+    self.dialect.do_execute(
+  File "/home/airflow/.local/lib/python3.12/site-packages/sqlalchemy/engine/default.py", line 736, in do_execute
+    cursor.execute(statement, parameters)
+sqlalchemy.exc.ProgrammingError: (psycopg2.errors.InvalidSchemaName) schema "raw_data" does not exist
+LINE 2: CREATE TABLE raw_data.raw_data (
+                     ^
+
+[SQL: 
+CREATE TABLE raw_data.raw_data (
+	cst_id FLOAT(53), 
+	cst_key TEXT, 
+	cst_firstname TEXT, 
+	cst_lastname TEXT, 
+	cst_marital_status TEXT, 
+	cst_gndr TEXT, 
+	cst_create_date TEXT
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405)
+[2025-09-30T04:44:11.596+0000] {taskinstance.py:1206} INFO - Marking task as UP_FOR_RETRY. dag_id=pipeline_orchestrate, task_id=EL_in_ELT, run_id=manual__2025-09-30T04:43:54.680306+00:00, execution_date=20250930T044354, start_date=20250930T044401, end_date=20250930T044411
+[2025-09-30T04:44:11.657+0000] {standard_task_runner.py:110} ERROR - Failed to execute job 35 for task EL_in_ELT ((psycopg2.errors.InvalidSchemaName) schema "raw_data" does not exist
+LINE 2: CREATE TABLE raw_data.raw_data (
+                     ^
+
+[SQL: 
+CREATE TABLE raw_data.raw_data (
+	cst_id FLOAT(53), 
+	cst_key TEXT, 
+	cst_firstname TEXT, 
+	cst_lastname TEXT, 
+	cst_marital_status TEXT, 
+	cst_gndr TEXT, 
+	cst_create_date TEXT
+)
+
+]
+(Background on this error at: https://sqlalche.me/e/14/f405); 521)
+[2025-09-30T04:44:11.719+0000] {local_task_job_runner.py:243} INFO - Task exited with return code 1
+[2025-09-30T04:44:11.776+0000] {taskinstance.py:3503} INFO - 0 downstream tasks scheduled from follow-on schedule check
+[2025-09-30T04:44:11.784+0000] {local_task_job_runner.py:222} INFO - ::endgroup::

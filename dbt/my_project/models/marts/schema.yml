@@ -1,0 +1,10 @@
+version: 2
+
+models:
+  - name: marts
+    description: 'значения уникальные, дата откатана на 2 года, нуллы все убраны и данные готовые для анализа'
+    columns:
+      - name: sys_id 
+        tests:
+          - not_null
+          - unique

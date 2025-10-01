@@ -1,0 +1,12 @@
+version: 2
+
+models:
+   - name: staging
+     description: "Меняются названия колонок и их типы, дубликаты оставляются, и так же чистятся данные от пробелов и от нуллов"
+     columns:
+      - name: sys_id
+        tests:
+          - not_null
+      - name: cust_key
+        tests:
+          - not_null

@@ -1,0 +1,61 @@
+services:
+  postgres:
+    image: postgres:15
+    container_name: postgredb
+    environment:
+      POSTGRES_USER: airflow
+      POSTGRES_PASSWORD: airflow
+      POSTGRES_DB: airflow
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./airflow/postgres_data:/var/lib/postgresql/data
+      - ./init-scripts:/docker-entrypoint-initdb.d
+    networks:
+      - my-network
+
+  airflow-init:
+    image: apache/airflow:2.9.3
+    container_name: airflow_main
+    group_add:
+      - '1001'
+    depends_on:
+      - postgres
+    environment:
+      - AIRFLOW__CORE__EXECUTOR=LocalExecutor
+      - AIRFLOW__DATABASE__SQL_ALCHEMY_CONN=postgresql+psycopg2://airflow:airflow@postgres/airflow
+      - AIRFLOW__CORE__LOAD_EXAMPLES=False
+    command: >
+      bash -c "pip install --no-cache-dir -r /opt/airflow/requirements.txt && airflow standalone"
+    volumes:
+      - ./airflow/dags:/opt/airflow/dags
+      - ./airflow/logs:/opt/airflow/logs
+      - ./airflow/plugins:/opt/airflow/plugins
+      - ./requirements.txt:/opt/airflow/requirements.txt
+      - ./EL_in_ELT:/opt/airflow/EL_in_ELT
+      - /var/run/docker.sock:/var/run/docker.sock
+    ports:
+      - 8080:8080
+    networks:
+      - my-network
+  dbt-postgres:
+    image: ghcr.io/dbt-labs/dbt-postgres:1.9.latest
+    container_name: dbt-transform
+    volumes:
+     - ./dbt/my_project:/usr/app
+     - ./dbt:/root/.dbt
+     - ./dbt/target:/usr/app/target
+    environment:
+      DBT_PROFILES_DIR: "/root/.dbt"
+    working_dir: /usr/app
+    depends_on:
+     - postgres
+    networks:
+     - my-network
+    command: run
+
+
+networks:
+  my-network:
+    driver: bridge
+    
