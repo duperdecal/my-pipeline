@@ -24,3 +24,6 @@ AWS S3 >> Python-s3fs >> Airflow >> Postgres >> dbt
     - AWS S3
     - dbt
 
+#Примеры работающего Airflow
+
+![Airflow с 4 тасками выполненных успешно](images/image_2025-10-01_22-06-02.png)
